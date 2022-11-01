@@ -1,21 +1,9 @@
 # AdventOfCode
 
-**TODO: Add description**
+These are my solutions for the 2022 edition of AdventOfCode!
 
-## Installation
+I am using Elixir to get a taste of FP and I just really enjoy the language in general. We'll see how far I get this year....
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `advent_of_code` to your list of dependencies in `mix.exs`:
+---
 
-```elixir
-def deps do
-  [
-    {:advent_of_code, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/advent_of_code>.
-
+I write a test with my expected output, so just run `mix test` to run the tests. If you want to see how long each day takes just run `mix test --trace`
