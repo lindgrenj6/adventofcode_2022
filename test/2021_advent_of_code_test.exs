@@ -11,6 +11,7 @@ defmodule TwentyTwentyOneAdventOfCodeTest do
     end
   end
 
+  @tag :skip
   test "2021dec01" do
     aocautotest(
       AdventOfCode.read_file("2021dec01.txt"),
@@ -21,6 +22,7 @@ defmodule TwentyTwentyOneAdventOfCodeTest do
     )
   end
 
+  @tag :skip
   test "2021dec02" do
     aocautotest(
       AdventOfCode.read_file("2021dec02.txt"),
@@ -31,6 +33,7 @@ defmodule TwentyTwentyOneAdventOfCodeTest do
     )
   end
 
+  @tag :skip
   test "2021dec03" do
     aocautotest(
       AdventOfCode.read_file("2021dec03.txt"),
@@ -41,6 +44,7 @@ defmodule TwentyTwentyOneAdventOfCodeTest do
     )
   end
 
+  @tag :skip
   test "2021dec05" do
     aocautotest(
       AdventOfCode.read_file("2021dec05.txt"),
