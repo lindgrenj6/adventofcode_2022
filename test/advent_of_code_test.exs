@@ -41,4 +41,14 @@ defmodule AdventOfCodeTest do
         ]
       )
     end
+
+    test "2022dec03" do
+      aocautotest(
+        AdventOfCode.read_file("dec03.txt"),
+        [
+          {&AdventOfCode.Dec03.first/1, 7785},
+          {&AdventOfCode.Dec03.second/1, 2633}
+        ]
+      )
+    end
 end
