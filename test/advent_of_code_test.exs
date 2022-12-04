@@ -11,18 +11,7 @@ defmodule AdventOfCodeTest do
     end
   end
 
-  # for copy/paste easiness
-  #   test "2022decXX" do
-  #     aocautotest(
-  #       AdventOfCode.read_file("decXX.txt"),
-  #       [
-  #         {&AdventOfCode.DecXX.first/1, 1715},
-  #         {&AdventOfCode.DecXX.second/1, 1739}
-  #       ]
-  #     )
-  #   end
-
-    test "2022dec01" do
+    test "dec01" do
       aocautotest(
         AdventOfCode.raw_read_file("dec01.txt"),
         [
@@ -32,7 +21,7 @@ defmodule AdventOfCodeTest do
       )
     end
 
-    test "2022dec02" do
+    test "dec02" do
       aocautotest(
         AdventOfCode.read_file("dec02.txt"),
         [
@@ -42,12 +31,22 @@ defmodule AdventOfCodeTest do
       )
     end
 
-    test "2022dec03" do
+    test "dec03" do
       aocautotest(
         AdventOfCode.read_file("dec03.txt"),
         [
           {&AdventOfCode.Dec03.first/1, 7785},
           {&AdventOfCode.Dec03.second/1, 2633}
+        ]
+      )
+    end
+
+    test "dec04" do
+      aocautotest(
+        AdventOfCode.read_file("dec04.txt"),
+        [
+          {&AdventOfCode.Dec04.first/1, 487},
+          {&AdventOfCode.Dec04.second/1, 849}
         ]
       )
     end
