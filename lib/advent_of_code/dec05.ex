@@ -34,22 +34,29 @@ defmodule AdventOfCode.Dec05 do
       # (eyes bleeding)
       |> map(&map(&1, fn thingy -> at(thingy, 1) end))
 
-    stacks = List.duplicate(%Stack{}, length(List.first(raw)))
+    # store the stacks as a list of pids, each is an agent containing the state for that stack.
+    stacks =
+      for _ <- 1..length(List.first(raw)) do
+        case Agent.start_link(fn -> Stack.new() end) do
+          {:ok, pid} -> pid
+          _ -> raise "failed to create agent"
+        end
+      end
+
     parse_stack(raw, stacks)
   end
 
   defp parse_stack([], stacks), do: stacks
 
   defp parse_stack([line | tail], stacks) do
-    stacks =
-      line
-      |> with_index()
-      |> reduce(stacks, fn
-        # ignore the " " since we want a clean stack
-        {" ", _}, acc -> acc
-        # otherwise, replace the current list with one appended. immutability makes this painful.
-        {item, idx}, acc -> List.replace_at(acc, idx, Stack.push(at(acc, idx), item))
-      end)
+    line
+    |> with_index()
+    |> each(fn
+      # ignore the " " since we want a clean stack
+      {" ", _} -> nil
+      # otherwise, replace the current list with one appended.
+      {item, idx} -> Agent.update(at(stacks, idx), fn stack -> Stack.push(stack, item) end)
+    end)
 
     parse_stack(tail, stacks)
   end
@@ -69,7 +76,7 @@ defmodule AdventOfCode.Dec05 do
   # reached the end, peek all the tops
   def run({[], stacks}) do
     stacks
-    |> map(&Stack.peek/1)
+    |> map(&Agent.get(&1, fn stack -> Stack.peek(stack) end))
     |> join()
   end
 
@@ -77,21 +84,12 @@ defmodule AdventOfCode.Dec05 do
     fromStack = at(stacks, from - 1)
     toStack = at(stacks, to - 1)
 
-    {fromStack, toStack} = move(count, fromStack, toStack)
-
-    # gotta replace these due to immutability
-    stacks = List.replace_at(stacks, from - 1, fromStack)
-    stacks = List.replace_at(stacks, to - 1, toStack)
+    for _ <- 1..count do
+      item = Agent.get_and_update(fromStack, fn stack -> Stack.pop(stack) end)
+      Agent.update(toStack, fn stack -> Stack.push(stack, item) end)
+    end
 
     run({tail, stacks})
-  end
-
-  # counting down to 0, moving from one stack to the other
-  def move(0, from, to), do: {from, to}
-
-  def move(n, from, to) do
-    {head, from} = Stack.pop(from)
-    move(n - 1, from, Stack.push(to, head))
   end
 
   ####################################################################
@@ -107,7 +105,7 @@ defmodule AdventOfCode.Dec05 do
 
   def runP2({[], stacks}) do
     stacks
-    |> map(&Stack.peek/1)
+    |> map(&Agent.get(&1, fn stack -> Stack.peek(stack) end))
     |> join()
   end
 
@@ -116,12 +114,8 @@ defmodule AdventOfCode.Dec05 do
     toStack = at(stacks, to - 1)
 
     # much cleaner now that we can grab many at a time
-    {items, fromStack} = Stack.pop_many(fromStack, count)
-    toStack = Stack.push_many(toStack, items)
-
-    stacks = List.replace_at(stacks, from - 1, fromStack)
-    stacks = List.replace_at(stacks, to - 1, toStack)
-
+    items = Agent.get_and_update(fromStack, fn stack -> Stack.pop_many(stack, count) end)
+    Agent.update(toStack, fn stack -> Stack.push_many(stack, items) end)
     runP2({tail, stacks})
   end
 end
