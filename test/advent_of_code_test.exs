@@ -73,4 +73,14 @@ defmodule AdventOfCodeTest do
       [1736, 268800]
     )
   end
+
+  test "dec09" do
+    aocautotest(
+      AdventOfCode.read_file("dec09.txt"),
+      # AdventOfCode.read_file("tinput.txt"),
+      AdventOfCode.Dec09,
+      [6486, 0]
+      # [12, 0]
+    )
+  end
 end
