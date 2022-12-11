@@ -14,5 +14,8 @@ jobs:
         with:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "1.18"
       - run: mix deps.get
       - run: mix test --trace --seed 0

@@ -92,4 +92,12 @@ defmodule AdventOfCodeTest do
       [14360, 0]
     )
   end
+
+  test "dec11" do
+    aocautotest(
+      nil,
+      AdventOfCode.Dec11,
+      [88208, 0]
+    )
+  end
 end
