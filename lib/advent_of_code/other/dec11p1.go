@@ -35,7 +35,7 @@ func main() {
 		inspections[i] = m.Inspections
 	}
 	sort.Ints(inspections)
-	fmt.Println(inspections[len(inspections)-1] * inspections[len(inspections)-2])
+	fmt.Print(inspections[len(inspections)-1] * inspections[len(inspections)-2])
 }
 
 func parse() []Monkey {
