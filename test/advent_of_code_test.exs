@@ -121,13 +121,14 @@ defmodule AdventOfCodeTest do
     )
   end
 
+  @tag timeout: :infinity
   test "dec21" do
     aocautotest(
-      # AdventOfCode.read_file("tinput.txt"),
-      AdventOfCode.read_file("dec21.txt"),
+      AdventOfCode.read_file("tinput.txt"),
+      # AdventOfCode.read_file("dec21.txt"),
       AdventOfCode.Dec21,
-      # [152, 0]
-      [309248622142100, 0]
+      [152, 0]
+      # [309248622142100, 0]
     )
   end
 end

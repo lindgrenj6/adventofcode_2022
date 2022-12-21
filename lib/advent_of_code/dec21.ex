@@ -27,11 +27,12 @@ defmodule AdventOfCode.Dec21 do
     input
     |> reduce(%{}, &parse/2)
     |> yell()
+    |> List.first()
   end
 
   def yell(monkeys) do
     if monkeys[:root].value != nil do
-      monkeys[:root].value
+      [monkeys[:root].value, monkeys]
     else
       Map.keys(monkeys)
       |> reduce(monkeys, fn name, acc ->
@@ -64,7 +65,34 @@ defmodule AdventOfCode.Dec21 do
   ####################################################################
   ## p2
   ####################################################################
-  def second(_input) do
-    0
+  def second(_input), do: 0
+  def _second(input) do
+    og = input |> reduce(%{}, &parse/2)
+
+    og
+    |> yell()
+    |> find_equal(og)
+  end
+
+  def find_equal([_, monkeys], og) do
+    root = monkeys[:root]
+    l = monkeys[root.left]
+    r = monkeys[root.right]
+
+    if l.value == r.value do
+      monkeys[:humn].value
+    else
+      humn = monkeys[:humn]
+      IO.puts(humn.value)
+
+      Map.put(og, :humn, %Dec21{
+        value: humn.value + 1,
+        left: humn.left,
+        right: humn.right,
+        op: humn.op
+      })
+      |> yell()
+      |> find_equal(og)
+    end
   end
 end
