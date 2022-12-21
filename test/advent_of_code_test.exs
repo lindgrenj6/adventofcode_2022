@@ -62,7 +62,7 @@ defmodule AdventOfCodeTest do
     aocautotest(
       AdventOfCode.read_file("dec07.txt"),
       AdventOfCode.Dec07,
-      [1517599, 2481982]
+      [1_517_599, 2_481_982]
     )
   end
 
@@ -70,7 +70,7 @@ defmodule AdventOfCodeTest do
     aocautotest(
       AdventOfCode.read_file("dec08.txt"),
       AdventOfCode.Dec08,
-      [1736, 268800]
+      [1736, 268_800]
     )
   end
 
@@ -97,7 +97,7 @@ defmodule AdventOfCodeTest do
     aocautotest(
       nil,
       AdventOfCode.Dec11,
-      [88208, 21115867968]
+      [88208, 21_115_867_968]
     )
   end
 
@@ -117,7 +117,17 @@ defmodule AdventOfCodeTest do
       AdventOfCode.read_file("dec20.txt"),
       AdventOfCode.Dec20,
       # [3, 1623178306]
-      [3700, -2385260520667]
+      [3700, -2_385_260_520_667]
+    )
+  end
+
+  test "dec21" do
+    aocautotest(
+      # AdventOfCode.read_file("tinput.txt"),
+      AdventOfCode.read_file("dec21.txt"),
+      AdventOfCode.Dec21,
+      # [152, 0]
+      [309248622142100, 0]
     )
   end
 end
