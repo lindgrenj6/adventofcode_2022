@@ -117,7 +117,7 @@ defmodule AdventOfCodeTest do
       AdventOfCode.read_file("dec20.txt"),
       AdventOfCode.Dec20,
       # [3, 1623178306]
-      [3700, 0]
+      [3700, -2385260520667]
     )
   end
 end
