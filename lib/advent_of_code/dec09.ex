@@ -92,14 +92,15 @@ defmodule AdventOfCode.Dec09 do
   end
 
   def follow_head(snake, _last) when length(snake) == 1, do: snake
-  def follow_head([head|tail], last) do
-    [next|rest] = tail
+
+  def follow_head([head | tail], last) do
+    [next | rest] = tail
 
     if Point.within(head, next, 2) do
       # the rest of the snake won't move if it's within the limit
-      [head|tail]
+      [head | tail]
     else
-      [head|follow_head([last|rest], next)]
+      [head | follow_head([last | rest], next)]
     end
   end
 end
